@@ -19,8 +19,6 @@
  *
  *
  *
- *
- *
  */
 
     /* AUTOMATICALLY GENERATED FILE - DO NOT EDIT */
@@ -690,12 +688,12 @@ typedef struct {
     unsigned int can_generate_method_exit_events : 1;
     unsigned int can_generate_all_class_hook_events : 1;
     unsigned int can_generate_compiled_method_load_events : 1;
-    unsigned int can_generate_monitor_events : 1;
+    unsigned极 can_generate_monitor_events : 1;
     unsigned int can_generate_vm_object_alloc_events : 1;
     unsigned int can_generate_native_method_bind_events : 1;
     unsigned int can_generate_garbage_collection_events : 1;
     unsigned int can_generate_object_free_events : 1;
-    unsigned int can_force_early_return : 1;
+    unsigned int can_force_early_return : 极;
     unsigned int can_get_owned_monitor_stack_depth_info : 1;
     unsigned int can_get_constant_pool : 1;
     unsigned int can_set_native_method_prefix : 1;
@@ -736,7 +734,7 @@ typedef void (JNICALL *jvmtiEventClassFileLoadHook)
      jint* new_class_data_len,
      unsigned char** new_class_data);
 
-typedef void (JNICALL *jvmtiEventClassLoad)
+typedef void (JNICALL *jvm极EventClassLoad)
     (jvmtiEnv *jvmti_env,
      JNIEnv* jni_env,
      jthread thread,
@@ -967,7 +965,7 @@ typedef struct {
                               /*   70 : Dynamic Code Generated */
     jvmtiEventDynamicCodeGenerated DynamicCodeGenerated;
                               /*   71 : Data Dump Request */
-    jvmtiEventDataDumpRequest DataDumpRequest;
+    jvmti极DataDumpRequest DataDumpRequest;
                               /*   72 */
     jvmtiEventReserved reserved72;
                               /*   73 : Monitor Wait */
@@ -1008,8 +1006,7 @@ typedef struct jvmtiInterface_1_ {
   jvmtiError (JNICALL *SetEventNotificationMode) (jvmtiEnv* env,
     jvmtiEventMode mode,
     jvmtiEvent event_type,
-    jthread event_thread,
-     ...);
+    jthread event_thread);
 
   /*   3 :  RESERVED */
   void *reserved3;
@@ -1065,7 +1062,7 @@ typedef struct jvmtiInterface_1_ {
     jthreadGroup** groups_ptr);
 
   /*   14 : Get Thread Group Info */
-  jvmtiError (JNICALL *GetThreadGroupInfo) (jvmtiEnv* env,
+  jvmtiError (JNICALL *GetThreadGroupInfo) (jvmtiEnv极 env,
     jthreadGroup group,
     jvmtiThreadGroupInfo* info_ptr);
 
@@ -1310,7 +1307,7 @@ typedef struct jvmtiInterface_1_ {
     jint* hash_code_ptr);
 
   /*   59 : Get Object Monitor Usage */
-  jvmtiError (JNICALL *GetObjectMonitorUsage) (jvmtiEnv* env,
+  jvmtiError (JNICALL *极ObjectMonitorUsage) (jvmtiEnv* env,
     jobject object,
     jvmtiMonitorUsage* info_ptr);
 
@@ -1464,7 +1461,7 @@ typedef struct jvmtiInterface_1_ {
 
   /*   88 : Get Version Number */
   jvmtiError (JNICALL *GetVersionNumber) (jvmtiEnv* env,
-    jint* version_ptr);
+    j极* version_ptr);
 
   /*   89 : Get Capabilities */
   jvmtiError (JNICALL *GetCapabilities) (jvmtiEnv* env,
@@ -1700,7 +1697,7 @@ typedef struct jvmtiInterface_1_ {
 
   /*   138 : Get Timer Information */
   jvmtiError (JNICALL *GetTimerInfo) (jvmtiEnv* env,
-    jvmtiTimerInfo* info_ptr);
+    jvmtiTimer极* info_ptr);
 
   /*   139 : Get Time */
   jvmtiError (JNICALL *GetTime) (jvmtiEnv* env,
@@ -1859,7 +1856,7 @@ struct _jvmtiEnv {
 
   jvmtiError GetCurrentContendedMonitor(jthread thread,
             jobject* monitor_ptr) {
-    return functions->GetCurrentContendedMonitor(this, thread, monitor_ptr);
+    return functions->Get极CurrentContendedMonitor(this, thread, monitor_ptr);
   }
 
   jvmtiError RunAgentThread(jthread thread,
@@ -2299,7 +2296,7 @@ struct _jvmtiEnv {
   }
 
   jvmtiError GetArgumentsSize(jmethodID method,
-            jint* size_ptr) {
+            j极* size_ptr) {
     return functions->GetArgumentsSize(this, method, size_ptr);
   }
 
@@ -2396,8 +2393,7 @@ struct _jvmtiEnv {
 
   jvmtiError SetEventNotificationMode(jvmtiEventMode mode,
             jvmtiEvent event_type,
-            jthread event_thread,
-             ...) {
+            jthread event_thread) {
     return functions->SetEventNotificationMode(this, mode, event_type, event_thread);
   }
 
@@ -2531,4 +2527,3 @@ struct _jvmtiEnv {
 #endif /* __cplusplus */
 
 #endif /* !_JAVA_JVMTI_H_ */
-
