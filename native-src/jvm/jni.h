@@ -1,47 +1,10 @@
-/*
- * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
- * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- */
-
-/*
- * We used part of Netscape's Java Runtime Interface (JRI) as the starting
- * point of our design and implementation.
- */
-
-/******************************************************************************
- * Java Runtime Interface
- * Copyright (c) 1996 Netscape Communications Corporation. All rights reserved.
- *****************************************************************************/
-
 #ifndef _JAVASOFT_JNI_H_
 #define _JAVASOFT_JNI_H_
 
 #include <stdio.h>
 #include <stdarg.h>
 
-/* jni_md.h contains the machine-dependent typedefs for jbyte, jint
-   and jlong */
-
+/* jni_md.h содержит зависящие от платформы определения для jbyte, jint и jlong */
 #include "jni_md.h"
 
 #ifdef __cplusplus
@@ -143,20 +106,17 @@ typedef enum _jobjectType {
      JNIWeakGlobalRefType = 3
 } jobjectRefType;
 
-
 #endif /* JNI_TYPES_ALREADY_DEFINED_IN_JNI_MD_H */
 
 /*
  * jboolean constants
  */
-
 #define JNI_FALSE 0
 #define JNI_TRUE 1
 
 /*
  * possible return values for JNI functions.
  */
-
 #define JNI_OK           0                 /* success */
 #define JNI_ERR          (-1)              /* unknown error */
 #define JNI_EDETACHED    (-2)              /* thread detached from the VM */
@@ -168,7 +128,6 @@ typedef enum _jobjectType {
 /*
  * used in ReleaseScalarArrayElements
  */
-
 #define JNI_COMMIT 1
 #define JNI_ABORT 2
 
@@ -176,7 +135,6 @@ typedef enum _jobjectType {
  * used in RegisterNatives to describe native method name, signature,
  * and function pointer.
  */
-
 typedef struct {
     char *name;
     char *signature;
@@ -186,9 +144,7 @@ typedef struct {
 /*
  * JNI Native Method Interface.
  */
-
 struct JNINativeInterface_;
-
 struct JNIEnv_;
 
 #ifdef __cplusplus
@@ -200,9 +156,7 @@ typedef const struct JNINativeInterface_ *JNIEnv;
 /*
  * JNI Invocation Interface.
  */
-
 struct JNIInvokeInterface_;
-
 struct JavaVM_;
 
 #ifdef __cplusplus
@@ -621,7 +575,6 @@ struct JNINativeInterface_ {
     void (JNICALL *ReleaseStringUTFChars)
       (JNIEnv *env, jstring str, const char* chars);
 
-
     jsize (JNICALL *GetArrayLength)
       (JNIEnv *env, jarray array);
 
@@ -761,23 +714,9 @@ struct JNINativeInterface_ {
     jlong (JNICALL *GetDirectBufferCapacity)
        (JNIEnv* env, jobject buf);
 
-    /* New JNI 1.6 Features */
-
     jobjectRefType (JNICALL *GetObjectRefType)
         (JNIEnv* env, jobject obj);
 };
-
-/*
- * We use inlined functions for C++ so that programmers can write:
- *
- *    env->FindClass("java/lang/String")
- *
- * in C++ rather than:
- *
- *    (*env)->FindClass(env, "java/lang/String")
- *
- * in C.
- */
 
 struct JNIEnv_ {
     const struct JNINativeInterface_ *functions;
@@ -1880,13 +1819,6 @@ typedef struct JavaVMAttachArgs {
     jobject group;
 } JavaVMAttachArgs;
 
-/* These will be VM-specific. */
-
-#define JDK1_2
-#define JDK1_4
-
-/* End VM-specific. */
-
 struct JNIInvokeInterface_ {
     void *reserved0;
     void *reserved1;
@@ -1952,6 +1884,21 @@ JNI_OnUnload(JavaVM *vm, void *reserved);
 #define JNI_VERSION_1_4 0x00010004
 #define JNI_VERSION_1_6 0x00010006
 #define JNI_VERSION_1_8 0x00010008
+
+/* Добавленные версии для поддержки Java 9+ */
+#define JNI_VERSION_9    0x00090000
+#define JNI_VERSION_10   0x000a0000
+#define JNI_VERSION_11   0x000b0000
+#define JNI_VERSION_12   0x000c0000
+#define JNI_VERSION_13   0x000d0000
+#define JNI_VERSION_14   0x000e0000
+#define JNI_VERSION_15   0x000f0000
+#define JNI_VERSION_16   0x00100000
+#define JNI_VERSION_17   0x00110000
+#define JNI_VERSION_18   0x00120000
+#define JNI_VERSION_19   0x00130000
+#define JNI_VERSION_20   0x00140000
+#define JNI_VERSION_21   0x00150000
 
 #ifdef __cplusplus
 } /* extern "C" */
